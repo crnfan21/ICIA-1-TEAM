@@ -105,7 +105,7 @@
 	
 			  <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
 	
-			  <li class="nav-item"><a href="" class="nav-link"><span>Login/Join</span></a></li>
+			  <li class="nav-item"><a href="/user/logJoin" class="nav-link"><span>Login/Join</span></a></li>
 			</ul>
 			
 		  </div>

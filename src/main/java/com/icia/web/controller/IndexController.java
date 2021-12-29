@@ -56,4 +56,10 @@ public class IndexController
 	{
 		return "/contact";
 	}
+	
+	@RequestMapping(value = "/user/logJoin", method=RequestMethod.GET)
+	public String logJoin(HttpServletRequest request, HttpServletResponse response)
+	{
+		return "/user/logJoin";
+	}
 }

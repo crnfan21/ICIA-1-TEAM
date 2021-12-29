@@ -59,6 +59,7 @@
             		<list>
             			<value>/index</value>
             			<value>/contact</value>
+            			<value>/user/logJoin</value>
             			<value>/user/login</value>
             			<value>/user/loginOut</value>
             			<value>/user/regForm</value>
