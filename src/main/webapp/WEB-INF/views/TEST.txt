@@ -1,1 +1,34 @@
+<<<<<<< HEAD
 ㅁㅁㅁㅁㅁ
+=======
+<<<<<<< HEAD
+누나 보여요?asdasdaaaaaaaaaaaaasdasdasd
+=======
+ㅁㄴㅇㄴㅁㅇㄴ
+<<<<<<< HEAD
+다람쥐 다녀감
+ㄴㄴㄴㄴㄴ
+다랆쥐 진짜로
+=======
+>>>>>>> refs/remotes/origin/master
+asdasdasdsad
+sdhdshdshdfhdf
+
+TEST
+
+1111
+
+jnkjnkjnkjn
+dwdwdwddwdwwdw
+<<<<<<< HEAD
+ㅁㄴㅇㅁㄴㅇㅁㄴㅇ
+=======
+
+이거 한글로 써도 깨지나? 깨지나??
+>>>>>>> refs/remotes/origin/master
+
+테스트테트스트
+>>>>>>> refs/remotes/origin/master
+
+다람쥐테스트
+>>>>>>> branch 'master' of https://github.com/crnfan21/ICIA-1-TEAM.git
