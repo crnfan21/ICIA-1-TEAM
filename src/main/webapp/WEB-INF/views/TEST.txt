@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ㅁㅁㅁㅁㅁ
 =======
 <<<<<<< HEAD
@@ -32,3 +33,6 @@ dwdwdwddwdwwdw
 
 다람쥐테스트
 >>>>>>> branch 'master' of https://github.com/crnfan21/ICIA-1-TEAM.git
+=======
+ㅁㅁㅁㅁ
+>>>>>>> refs/remotes/origin/master
