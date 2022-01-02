@@ -80,6 +80,11 @@
 	                    <value>/Donation/orderCheck</value>
 	                    <value>/Donation/DonationI</value>
 	                    
+	                    
+	                    <value>/about/about</value>
+	                    <value>/contact2/contact2</value>
+	                    <value>/about/notice</value>
+	                    <value>/about/writeForm</value>
 	                    <value>/about/noticeView</value>
             		</list>
             	</constructor-arg>
