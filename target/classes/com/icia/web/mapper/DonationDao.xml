@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icia.web.dao.DonationDao">
+
+   <resultMap id="DonationResultMap"
+      type="com.icia.web.model.Donation">
+      <id column="PDS_SEQ" property="pdsSeq" />
+      <result column="PDS_STOCK" property="pdsStock" />
+      <result column="PDS_PRICE" property="pdsPrice" />
+      <result column="PDS_NAME" property="pdsName" />
+      <result column="PDS_SIZE" property="pdsSize" />
+      <result column="PDS_MAIN_IMG" property="pdsMainImg" />
+      <result column="PDS_SUB_IMG1" property="pdsSubImg1" />
+      <result column="PDS_SUB_IMG2" property="pdsSubImg2" />
+      <result column="PDS_SUB_IMG3" property="pdsSumbImg3" />
+      <result column="PDS_TYPE" property="pdsType" />
+   </resultMap>
+
+   <resultMap id="purchaseResultMap"
+      type="com.icia.web.model.Purchase">
+      <id column="PCS_SEQ" property="pcsSeq" />
+      <result column="PCS_STOCK" property="pcsStock" />
+      <result column="USER_ID" property="userId" />
+      <result column="PCS_AMOUNT" property="pcsAmount" />
+      <result column="PCS_R_AMOUNT" property="pcsRAmount" />
+      <result column="PCS_POINT" property="pcsPoint" />
+      <result column="PCS_DATE" property="pcsDate" />
+      <result column="PDS_SEQ" property="pdsSeq" />
+      <result column="PCS_STATUS" property="pcsStatus" />
+      <result column="PCS_ADDRESS" property="pcsAddress" />
+   </resultMap>
+
+
+   <select id="productList"
+      parameterType="com.icia.web.model.Donation"
+      resultMap="DonationResultMap">
+      SELECT
+      PDS_SEQ,
+      PDS_STOCK,
+      PDS_PRICE,
+      PDS_NAME,
+      PDS_SIZE,
+      PDS_MAIN_IMG,
+      PDS_SUB_IMG1,
+      PDS_SUB_IMG2,
+      PDS_SUB_IMG3,
+      PDS_TYPE
+      FROM(SELECT
+      ROWNUM AS
+      RNUM,
+      PDS_SEQ,
+      PDS_STOCK,
+      PDS_PRICE,
+      PDS_NAME,
+      PDS_SIZE,
+      PDS_MAIN_IMG,
+      PDS_SUB_IMG1,
+      PDS_SUB_IMG2,
+      PDS_SUB_IMG3,
+      PDS_TYPE
+      FROM (SELECT
+      PDS_SEQ AS
+      PDS_SEQ,
+      NVL(PDS_STOCK, 0) AS PDS_STOCK,
+      NVL(PDS_PRICE, 0) AS PDS_PRICE,
+      NVL(PDS_NAME, '') AS PDS_NAME,
+      NVL(PDS_SIZE, '')AS PDS_SIZE,
+      NVL(PDS_MAIN_IMG,'')AS PDS_MAIN_IMG,
+      NVL(PDS_SUB_IMG1,'')AS
+      PDS_SUB_IMG1,
+      NVL(PDS_SUB_IMG2,'')AS PDS_SUB_IMG2,
+      NVL(PDS_SUB_IMG3,'')AS PDS_SUB_IMG3,
+      NVL(PDS_TYPE,'')AS PDS_TYPE
+      FROM
+      TBL_STORE_PRODUCT
+      WHERE
+      1=1
+      <if test='searchType1 != null and searchType1 !=""'>
+         <choose>
+            <when test='searchType1 == "1"'>
+               AND
+               PDS_SIZE='S'
+            </when>
+            <when test='searchType1 == "2"'>
+               AND
+               PDS_SIZE='M'
+            </when>
+            <when test='searchType1 == "3"'>
+               AND
+               PDS_SIZE='L'
+            </when>
+         </choose>
+      </if>
+      <if test='searchType2 != null and searchType2 != ""'>
+         <choose>
+            <when test='searchType2 == "1"'>
+               AND
+               PDS_TYPE='PA'
+            </when>
+            <when test='searchType2 == "2"'>
+               AND
+               PDS_TYPE='PB'
+            </when>
+            <when test='searchType2 == "3"'>
+               AND
+               PDS_TYPE='PC'
+            </when>
+            <when test='searchType2 == "4"'>
+               AND
+               PDS_TYPE='PD'
+            </when>
+            <when test='searchType2 == "5"'>
+               AND
+               PDS_TYPE='PE'
+            </when>
+         </choose>
+      </if>
+      ORDER BY PDS_SEQ ASC))
+      WHERE
+      RNUM
+    <![CDATA[>=]]>
+      #{startRow}
+      AND
+      RNUM
+    <![CDATA[<=]]>
+      #{endRow}
+
+   </select>
+
+   <select id="productListCount"
+      parameterType="com.icia.web.model.Donation" resultType="long">
+
+      SELECT
+      COUNT(PDS_SEQ) AS CNT
+      FROM
+      TBL_STORE_PRODUCT
+      WHERE
+      1=1
+      <if test='searchType1 != null and searchType1 !=""'>
+         <choose>
+            <when test='searchType1 == "1"'>
+               AND
+               PDS_SIZE='S'
+            </when>
+            <when test='searchType1 == "2"'>
+               AND
+               PDS_SIZE='M'
+            </when>
+            <when test='searchType1 == "3"'>
+               AND
+               PDS_SIZE='L'
+            </when>
+         </choose>
+      </if>
+      <if test='searchType2 != null and searchType2 != ""'>
+         <choose>
+            <when test='searchType2 == "1"'>
+               AND
+               PDS_TYPE='PA'
+            </when>
+            <when test='searchType2 == "2"'>
+               AND
+               PDS_TYPE='PB'
+            </when>
+            <when test='searchType2 == "3"'>
+               AND
+               PDS_TYPE='PC'
+            </when>
+            <when test='searchType2 == "4"'>
+               AND
+               PDS_TYPE='PD'
+            </when>
+            <when test='searchType2 == "5"'>
+               AND
+               PDS_TYPE='PE'
+            </when>
+         </choose>
+      </if>
+
+   </select>
+
+   <select id="productSelect" parameterType="long"
+      resultMap="DonationResultMap">
+      SELECT
+      PDS_SEQ,
+      NVL(PDS_STOCK, '') AS PDS_STOCK,
+      NVL(PDS_PRICE, '') AS PDS_PRICE,
+      NVL(PDS_NAME, '') AS PDS_NAME,
+      NVL(PDS_SIZE, '') AS PDS_SIZE,
+      NVL(PDS_MAIN_IMG, '') AS PDS_MAIN_IMG,
+      NVL(PDS_SUB_IMG1, '') AS PDS_SUB_IMG1,
+      NVL(PDS_TYPE, '') AS PDS_TYPE
+      FROM
+      TBL_STORE_PRODUCT
+      WHERE
+      PDS_SEQ = #{value}
+   </select>
+
+   <insert id="productInsert"
+      parameterType="com.icia.web.model.Purchase">
+      INSERT INTO TBL_STORE_PURCHASE (
+      PCS_SEQ,
+      PCS_STOCK,
+      USER_ID,
+      PCS_AMOUNT,
+      PCS_R_AMOUNT,
+      PCS_POINT,
+      PCS_DATE,
+      PDS_SEQ,
+      PCS_STATUS,
+      PCS_ADDRESS
+      ) VALUES (
+      SEQ_PURCHASE_SEQ.NEXTVAL,
+      #{pcsStock},
+      #{userId},
+      #{pcsAmount},
+      #{pcsRAmount},
+      #{pcsPoint},
+      SYSDATE,
+      #{pdsSeq},
+      1,
+      #{pcsAddress}
+      )
+   </insert>
+
+</mapper>

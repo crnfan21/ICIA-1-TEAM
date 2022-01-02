@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icia.web.dao.AdoptDao">
+
+<!-- 강아지 resultMap 시작 -->
+<resultMap id="dogResultMap" type="com.icia.web.model.Dog">
+    <id column="DOG_SEQ" property="dogSeq" />
+    <result column="DOG_NAME" property="dogName" />
+    <result column="DOG_GENDER" property="dogGender" />
+    <result column="DOG_MBTI" property="dogMBTI" />
+    <result column="ENT_DATE" property="entDate" />
+    <result column="ADT_DATE" property="adtDate" />
+    <result column="NEUTERING" property="neutering" />
+    <result column="DOG_SIG" property="dogSig" />
+    <result column="DOG_MAIN_IMG" property="dogMainImg" />
+    <result column="DOG_SUB_IMG1" property="dogSubImg1" />
+    <result column="DOG_SUB_IMG2" property="dogSubImg2" />
+    <result column="DOG_SUB_IMG3" property="dogSubImg3" />
+    <result column="DOG_SPECIES" property="dogSpecies" />
+    <result column="DOG_SIZE" property="dogSize" />
+    <result column="DOG_CONTENT" property="dogContent" />
+</resultMap>
+<!-- 게시물 resultMap 종료 -->
+
+<!-- 강아지 리스트 시작 -->
+<select id="dogList" parameterType="com.icia.web.model.Dog" resultMap="dogResultMap">
+SELECT
+    DOG_SEQ,
+    DOG_NAME,
+    DOG_GENDER,
+    DOG_MBTI,
+    ENT_DATE,
+    ADT_DATE,
+    NEUTERING,
+    DOG_SIG,
+    DOG_MAIN_IMG,
+    DOG_SUB_IMG1,
+    DOG_SUB_IMG2,
+    DOG_SUB_IMG3,
+    DOG_SPECIES,
+    DOG_SIZE,
+    DOG_CONTENT
+FROM (
+        SELECT
+            ROWNUM AS RNUM,
+            DOG_SEQ,
+            DOG_NAME,
+            DOG_GENDER,
+            DOG_MBTI,
+            ENT_DATE,
+            ADT_DATE,
+            NEUTERING,
+            DOG_SIG,
+            DOG_MAIN_IMG,
+            DOG_SUB_IMG1,
+            DOG_SUB_IMG2,
+            DOG_SUB_IMG3,
+            DOG_SPECIES,
+            DOG_SIZE,
+            DOG_CONTENT
+        FROM   (
+                SELECT
+                    A.DOG_SEQ AS DOG_SEQ,
+                    NVL(A.DOG_NAME, '') AS DOG_NAME,
+                    NVL(A.DOG_GENDER, '') AS DOG_GENDER,
+                    A.DOG_MBTI AS DOG_MBTI,
+                    NVL(TO_CHAR(A.ENT_DATE, 'YYYY.MM.DD'), '') AS ENT_DATE,
+                    NVL(TO_CHAR(A.ADT_DATE, 'YYYY.MM.DD'), '') AS ADT_DATE,
+                    NVL(A.NEUTERING, '') AS NEUTERING,
+                    NVL(A.DOG_SIG, '') AS DOG_SIG,
+                    NVL(A.DOG_MAIN_IMG, '') AS DOG_MAIN_IMG,
+                    NVL(A.DOG_SUB_IMG1, '') AS DOG_SUB_IMG1,
+                    NVL(A.DOG_SUB_IMG2, '') AS DOG_SUB_IMG2,
+                    NVL(A.DOG_SUB_IMG3, '') AS DOG_SUB_IMG3,
+                    NVL(B.DOG_SPECIES, '') AS DOG_SPECIES,
+                    NVL(B.DOG_SIZE, '') AS DOG_SIZE,
+                    NVL(B.DOG_CONTENT, '') AS DOG_CONTENT
+                FROM
+                    TBL_DOG A, TBL_DOG_CODE B
+                WHERE 
+                    A.DOG_MBTI = B.DOG_MBTI
+                AND
+                    A.ADT_DATE IS NULL
+<if test='searchType != null and searchType != "" and searchValue != null and searchValue != ""'>
+	<choose>
+		<when test='searchType == "1"'>                   
+                AND
+                    A.DOG_GENDER LIKE '%' || #{searchValue} ||'%'
+        </when>
+        <when test='searchType == "2"'>
+                AND
+                    B.DOG_SPECIES LIKE '%' || #{searchValue} ||'%'
+        </when>
+        <when test='searchType == "3"'>
+                AND
+                    B.DOG_SIZE LIKE '%' || #{searchValue} ||'%'
+        </when>
+    </choose>
+</if>
+                ORDER BY
+                    A.DOG_SEQ ASC))
+WHERE
+    RNUM <![CDATA[>=]]> #{startRow}
+AND
+    RNUM <![CDATA[<=]]> #{endRow}
+</select>
+<!-- 강아지 리스트 끝 -->
+
+<!-- 강아지 총 수 시작 -->
+<select id="dogListCount" parameterType="com.icia.web.model.Dog" resultType="long">
+SELECT
+    COUNT(A.DOG_SEQ) AS CNT
+FROM
+    TBL_DOG A, TBL_DOG_CODE B
+WHERE
+    A.DOG_MBTI = B.DOG_MBTI
+AND
+	A.ADT_DATE IS NULL
+<if test='searchType != null and searchType != "" and searchValue != null and searchValue != ""'>
+	<choose>
+		<when test='searchType == "1"'>
+  AND
+    A.DOG_GENDER LIKE '%' || #{searchValue} ||'%'
+    	</when>
+    	<when test='searchType == "2"'>
+  AND
+    B.DOG_SPECIES LIKE '%' || #{searchValue} || '%'
+    	</when>
+    	<when test='searchType == "3"'>
+  AND
+    B.DOG_SIZE LIKE '%' || #{searchValue} || '%'
+    	</when>
+    </choose>
+</if>
+</select>
+<!-- 강아지 총 수 끝 -->
+
+<!-- 강아지 상세 조회 시작 -->
+<select id="dogSelect" parameterType="long" resultMap="dogResultMap">
+SELECT
+      A.DOG_SEQ AS DOG_SEQ,
+      NVL(A.DOG_NAME, '') AS DOG_NAME,
+      NVL(A.DOG_GENDER, '') AS DOG_GENDER,
+      A.DOG_MBTI AS DOG_MBTI,
+      NVL(TO_CHAR(A.ENT_DATE, 'YYYY.MM.DD'), '') AS ENT_DATE,
+      NVL(TO_CHAR(A.ADT_DATE, 'YYYY.MM.DD'), '') AS ADT_DATE,
+      NVL(A.NEUTERING, '') AS NEUTERING,
+      NVL(A.DOG_SIG, '') AS DOG_SIG,
+      NVL(A.DOG_MAIN_IMG, '') AS DOG_MAIN_IMG,
+      NVL(A.DOG_SUB_IMG1, '') AS DOG_SUB_IMG1,
+      NVL(A.DOG_SUB_IMG2, '') AS DOG_SUB_IMG2,
+      NVL(A.DOG_SUB_IMG3, '') AS DOG_SUB_IMG3,
+      NVL(B.DOG_SPECIES, '') AS DOG_SPECIES,
+      NVL(B.DOG_SIZE, '') AS DOG_SIZE,
+      NVL(B.DOG_CONTENT, '') AS DOG_CONTENT
+  FROM
+      TBL_DOG A, TBL_DOG_CODE B
+  WHERE
+  	  A.DOG_SEQ = #{value}
+   AND
+      A.DOG_MBTI = B.DOG_MBTI
+</select>
+<!-- 강아지 상세 조회 끝 -->
+
+<!-- 입양신청 작성 시작 -->
+<insert id="adoptInsert" parameterType="com.icia.web.model.Adopt">
+INSERT INTO TBL_ADOPT (
+    ADT_SEQ,
+    USER_ID,
+    DOG_SEQ,
+    ADT_PERIOD,
+    ADT_REASON,
+    ADT_HOME,
+    ADT_AGREE,
+    ADT_PET,
+    REG_DATE,
+    ADT_STATUS
+) VALUES (
+    SEQ_ADOPT_SEQ.NEXTVAL,
+    #{userId},
+    #{dogSeq},
+    #{adtPeriod},
+    #{adtReason},
+    #{adtHome},
+    #{adpAgree},
+    #{adtPet},
+    SYSDATE,
+    'B'
+)
+</insert>
+<!-- 입양신청 작성 끝 -->
+
+<!-- 다음 강아지 번호 선택 시작 -->
+<select id="dogSeqSelect" parameterType="com.icia.web.model.Dog" resultType="long">
+SELECT
+    MAX(DOG_SEQ)+1 AS DOG_SEQ
+FROM 
+    TBL_DOG
+</select>
+<!-- 다음 강아지 번호 선택 끝 -->
+
+<!-- 강아지 등록 시작 -->
+<insert id="dogInsert" parameterType="com.icia.web.model.Dog">
+INSERT INTO TBL_DOG (
+    DOG_SEQ,
+    DOG_NAME,
+    DOG_GENDER,
+    DOG_MBTI,
+    ENT_DATE,
+    NEUTERING,
+    DOG_SIG,
+    DOG_MAIN_IMG,
+    DOG_SUB_IMG1,
+    DOG_SUB_IMG2,
+    DOG_SUB_IMG3
+) VALUES (
+    #{dogSeq},
+    #{dogName},
+    #{dogGender},
+    #{dogMBTI},
+    #{entDate},
+    #{neutering},
+    #{dogSig},
+    #{dogMainImg},
+   	#{dogSubImg1},
+    #{dogSubImg2},
+    #{dogSubImg3}
+)
+</insert>
+<!-- 강아지 등록 끝 -->
+
+</mapper>

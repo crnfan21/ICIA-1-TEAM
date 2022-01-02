@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icia.web.dao.UserDao">
+
+<resultMap type="com.icia.web.model.User" id="userResultMap">
+   <id column="USER_ID" property="userId" /> 
+   <result column="USER_PWD" property="userPwd" />
+   <result column="USER_NAME" property="userName" /> 
+   <result column="USER_EMAIL" property="userEmail" />
+   <result column="STATUS" property="status" />
+   <result column="REG_DATE" property="regDate" />
+   <result column="USER_ADDRESS" property="userAddress" />
+   <result column="USER_PNUM" property="userPNum" />
+   <result column="DOG_SEQ_LIST" property="dogSeqList" />
+   <result column="USER_B_DATE" property="userBDate" />
+   <result column="USER_NNAME" property="userNName" />
+   <result column="USER_GRADE" property="userGrade" />
+   <result column="USER_POINT" property="userPoint" />
+</resultMap>
+
+<select id="userSelect" parameterType="string" resultMap="userResultMap">
+    
+SELECT
+    USER_ID,
+    NVL(USER_PWD, '') AS USER_PWD,
+    NVL(USER_NAME, '') AS USER_NAME,
+    NVL(USER_EMAIL, '') AS USER_EMAIL,
+    NVL(STATUS, '') AS STATUS,
+    NVL(TO_CHAR(REG_DATE, 'YYYY.MM.DD HH24:MI:SS'), '') AS REG_DATE,
+    NVL(USER_ADDRESS, '') AS USER_ADDRESS,
+    NVL(USER_PNUM, '') AS USER_PNUM, 
+    NVL(DOG_SEQ_LIST, '') AS DOG_SEQ_LIST,
+    NVL(USER_B_DATE, '') AS USER_B_DATE,
+    NVL(USER_NNAME, '') AS USER_NNAME,
+    NVL(USER_GRADE, '') AS USER_GRADE,
+    NVL(USER_POINT, '') AS USER_POINT
+FROM
+    TBL_USER
+WHERE
+    USER_ID = #{value}
+        
+</select>
+
+<insert id="userInsert" parameterType="com.icia.web.model.User">
+            
+INSERT INTO TBL_USER (
+    USER_ID,
+    USER_PWD,
+    USER_NAME,
+    USER_EMAIL,
+    STATUS,
+    REG_DATE,
+    USER_ADDRESS,
+    USER_PNUM,
+    DOG_SEQ_LIST,
+    USER_B_DATE,
+    USER_NNAME,
+    USER_GRADE,
+    USER_POINT
+) VALUES (
+    #{userId},
+    #{userPwd},
+    #{userName},
+    #{userEmail},
+    #{status},
+    SYSDATE,
+    #{userAddress},
+    #{userPNum},
+    #{dogSeqList},
+    #{userBDate},
+    #{userNName},
+    #{userGrade},
+    #{userPoint}
+)         
+</insert>
+
+<update id="userUpdate" parameterType="com.icia.web.model.User">
+UPDATE TBL_USER
+   SET USER_PWD = #{userPwd},
+       USER_NAME = #{userName},
+       USER_EMAIL = #{userEmail},
+       REG_DATE = SYSDATE,
+       USER_ADDRESS = #{userAddress},
+       USER_PNUM = #{userPNum},
+       USER_B_DATE = #{userBDate},
+       USER_NNAME = #{userNName}
+ WHERE USER_ID = #{userId}
+ </update>
+ 
+
+ 
+ 
+</mapper>

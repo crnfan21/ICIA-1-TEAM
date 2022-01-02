@@ -148,7 +148,37 @@ p {
 
 
 
- } 
+ }
+ 
+.font1
+{
+  font-family: 'GmarketSansLight';
+  font-size : 15px;
+}
+
+.font2
+{
+  font-family: 'GmarketSansBold';
+  font-size : 30px;
+}
+
+.font3
+{
+  font-family: 'GmarketSansMedium';
+  font-size : 15px;
+}
+
+.font4
+{
+  font-family: 'GmarketSansMedium';
+  font-size : 20px;
+}
+
+.font5
+{
+  font-family: 'GmarketSansBold';
+  font-size : 20px;
+}
 
 abbr[title],
 abbr[data-original-title] {
@@ -1399,6 +1429,7 @@ pre {
     margin-left: 91.66667%; } }
 
 .table {
+	min-width: 800px;
   width: 100%;
   margin-bottom: 1rem;
   background-color: transparent; }
@@ -9023,7 +9054,7 @@ h1, h2, h3, h4, h5,
       content: ''; }
 
 .table {
-  min-width: 1000px !important;
+  min-width: 950px !important;
   width: 100%;
   text-align: center; }
   .table th {
@@ -9984,4 +10015,222 @@ textarea.form-control {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
     
-    
+@font-face {
+    font-family: 'GmarketSansLight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 민희 추가 시작 */
+#Int
+{
+   font-size : 200%;
+}
+
+#Innt
+{
+   font-size : 200%;
+   color: pink;
+}
+
+#text
+{
+   font-size : 110%;
+}
+
+
+#ss
+{
+   height: 150px;
+
+}
+
+#sss
+{
+   height: 240px;
+
+}
+
+
+#divv
+{
+   border:2px soild #FAE0D4;
+}
+
+#divs
+{
+   color: #EDC6C6; 
+   font-size:23px;
+}
+
+#divss
+{
+   font-size:18px;
+}
+
+
+#fontt
+{
+   color:white;
+}
+
+ .owl-carousel.home-slider .slider-item .slider-text .one-third2 {
+          height: 700px;
+          width: 100%;
+          position: relative;
+          z-index: -1;
+          background-position: top center; }
+
+
++css, vender 헤더랑 후원페이지에 추가
+
+12/30
+
+팝업창 추가
+
+12/31
+
+#fff
+{
+   font-size:25px;
+   color:#EDC6C6;
+}
+
+#f
+{
+   float:left;
+}
+
+#s
+{
+   float:right; display:inline-block;
+}
+
+#aaa
+{
+   width: 80%;
+  padding-right: 15px;
+  padding-left: 175px;
+  margin-right: 190px;
+  margin-left: 90px;
+}
+
+
+#summ
+{
+   border:none;
+   color:#999999;
+   width:80px;
+   
+   margin-bottom:1em;
+}
+
+
+#ck1
+{
+   width:70px;
+   height:35px;
+}
+
+#useradress
+{
+   width:370px;
+   height:30px;
+   border:none;
+   color:#999999;
+}
+
+#sample3_address,#sample3_extraAddress,#sample3_detailAddress
+{
+
+   border:none;
+   border-bottom: 1px solid gray;}
+   
+}
+
+#sample3_detailAddress
+{
+   width:370px;
+   border:none;
+   border-bottom: 1px solid gray;
+}
+
+ #remote 
+{
+
+   position: fixed;
+   
+   width: 100px;
+   
+   height: 100px;
+   
+   right: 150px;
+   
+   bottom: 80px;
+   
+   display: none;
+
+ } 
+
+#bbb
+{
+   width: 60%;
+  padding-right: 15px;
+  padding-left: 175px;
+  margin-right: 190px;
+  margin-left: 300px;
+}
+
+#productOrder
+{
+   width: 165px;
+   height:52px;
+   border:none;
+   background-color: #EDC6C6;
+   color:white;
+}
+
+#remoCo
+{
+
+   position: fixed;
+   
+   width: 200px;
+   
+   height: 100px;
+   
+   right: 10px;
+   
+   bottom: 380px;
+   
+   display: none;
+   
+   zIndex: 1;
+
+ }
+ 
+ #btnOrder
+{
+   width: 165px;
+   height:52px;
+   border:none;
+   background-color: #EDC6C6;
+   color:white;
+}
+
+/* 민희 추가 끝 */

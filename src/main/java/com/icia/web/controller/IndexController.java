@@ -57,9 +57,44 @@ public class IndexController
 		return "/contact";
 	}
 	
-	@RequestMapping(value = "/user/logJoin", method=RequestMethod.GET)
-	public String logJoin(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping(value="/popUpRoad")
+   public String popUpRoad(HttpServletRequest request, HttpServletResponse response)
+   {
+      return "/popUpRoad";
+   }
+	
+	//지웅 추가 시작
+	
+	@RequestMapping(value = "/about/about", method=RequestMethod.GET)
+	public String about(HttpServletRequest request, HttpServletResponse response)
 	{
-		return "/user/logJoin";
+		return "/about/about";
 	}
+	
+	@RequestMapping(value = "/contact2/contact2", method=RequestMethod.GET)
+	public String contact2(HttpServletRequest request, HttpServletResponse response)
+	{
+		return "/contact2/contact2";
+	}
+	
+	@RequestMapping(value = "/about/notice", method=RequestMethod.GET)
+	public String notice(HttpServletRequest request, HttpServletResponse response)
+	{
+		return "/about/notice";
+	}
+	
+	@RequestMapping(value = "/about/noticeView", method=RequestMethod.GET)
+	public String noticeView(HttpServletRequest request, HttpServletResponse response)
+	{
+		return "/about/noticeView";
+	}
+	
+	@RequestMapping(value = "/about/writeForm", method=RequestMethod.GET)
+	public String writeForm(HttpServletRequest request, HttpServletResponse response)
+	{
+		return "/about/writeForm";
+	}
+	
+	//지웅 추가 끝
+	
 }
